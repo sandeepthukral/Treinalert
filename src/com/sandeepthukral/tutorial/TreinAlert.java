@@ -14,16 +14,23 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sandeepthukral.tutorial.util.Utilities;
 
@@ -31,6 +38,9 @@ public class TreinAlert extends Activity {
 	private TextView textView;
 	List<VertrekkendeTrein> listOfDepartures=new ArrayList<VertrekkendeTrein>();
 	TrainAdapter adapter=null;
+	
+	private static final int SHOW_ABOUT_DIALOG = 101;
+	private static final int SHOW_SETTINGS_COMING_DIALOG = 102;
 	
 /** Called when the activity is first created. */
 
@@ -46,7 +56,56 @@ public class TreinAlert extends Activity {
 		adapter=new TrainAdapter();
 		list.setAdapter(adapter);
 	}
+	
+	protected Dialog onCreateDialog(int id) {
+        
+		Dialog dialog;
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		String message="";
+		
+		switch(id) {
+        case SHOW_ABOUT_DIALOG:
+        	
+        	message="(C) 2012 Sandeep Thukral\nhttp://www.thukral.nl";
+    		
+    		builder.setMessage(message);
+    		builder.setNegativeButton(R.string.STRING_OK, new DialogInterface.OnClickListener() {
+					
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();	
+				}
+			});
+    		
+    		dialog = builder.create();
+            break;
+        case SHOW_SETTINGS_COMING_DIALOG:
+        	
+        	message="Settings dialog will be coming soon";
+    		
+    		builder.setMessage(message);
+    		builder.setNegativeButton(R.string.STRING_OK, new DialogInterface.OnClickListener() {
+					
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();	
+				}
+			});
+    		
+    		dialog = builder.create();
+            break;
+        default:
+            dialog = null;
+        }
+        return dialog;
+    }
 
+	/**
+	 * 
+	 * @author sandeep
+	 * This class is an implementation of AsyncTask. This will fetch the response
+	 * from the API and help parse the same.
+	 */
 	private class DownloadWebPageTask extends AsyncTask<String, Void, String> {
 		private static final String TAG = "ProgressTest";
 
@@ -106,6 +165,11 @@ public class TreinAlert extends Activity {
 		}
 	}
 
+	/**
+	 * I think this one is the 'default' code executed when the button is clicked
+	 * The link between the function name and the button is theid of the button
+	 * @param view
+	 */
 	public void station01(View view) {
 		Log.d("performance","Button Clicked");
 		DownloadWebPageTask task = new DownloadWebPageTask();
@@ -114,6 +178,11 @@ public class TreinAlert extends Activity {
 		textView.setText("Station : Almere Muziekwijk");
 	}
 	
+	/**
+	 * I think this one is the 'default' code executed when the button is clicked
+	 * The link between the function name and the button is theid of the button
+	 * @param view
+	 */
 	public void station02(View view) {
 		DownloadWebPageTask task = new DownloadWebPageTask();
 		task.execute(new String[] { "http://webservices.ns.nl/ns-api-avt?station=dmnz" });
@@ -160,6 +229,34 @@ public class TreinAlert extends Activity {
     	}
     }
     
+	/**
+	 * This method displays the menu for the app
+	 */
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	new MenuInflater(this).inflate(R.menu.option, menu);
+    	return(super.onCreateOptionsMenu(menu));
+    }
+    
+	/**
+	 * This method decides what action to take when a menu item is selected
+	 */
+	
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	if (item.getItemId() == R.id.about){
+  
+    		showDialog(SHOW_ABOUT_DIALOG);
+    		return(true);
+    	} else if (item.getItemId()==R.id.settings) {
+    		//showDialog(SHOW_SETTINGS_COMING_DIALOG);
+    		Toast.makeText(TreinAlert.this, "The settings dialog will come soon", Toast.LENGTH_SHORT).show();
+    		return(true);
+    	}
+    	
+    	return(super.onOptionsItemSelected(item));
+    }
+	
 	/**
 	 * @author sandeep
 	 *	This class actually assigns the text or images to the individual (Text or Image) views

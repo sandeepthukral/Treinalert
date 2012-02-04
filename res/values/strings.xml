@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, ProgressTestActivity!</string>
     <string name="app_name">TreinAlert</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="STRING_OK">OK</string>
 
 </resources>
