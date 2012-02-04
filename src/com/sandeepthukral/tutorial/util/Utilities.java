@@ -60,22 +60,37 @@ public class Utilities {
 			   Node nNode = nList.item(temp);
 			   if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 	 
-			      Element eElement = (Element) nNode;
+			      Element vertrekkendeTreinElement = (Element) nNode;
 			      
 			      VertrekkendeTrein vTrein = new VertrekkendeTrein();
 	 
-			      vTrein.setRitNummer(getTagValue(VertrekkendeTrein.RITNUMMER, eElement));
-			      vTrein.setDelay(getTagValue(VertrekkendeTrein.VERTREKVERTRAGINGTEKST, eElement));
-			      vTrein.setVertrekTijd(getTagValue(VertrekkendeTrein.VERTREKTIJD, eElement));
-			      vTrein.setEindBestemming(getTagValue(VertrekkendeTrein.EINDBESTEMMING, eElement));
-			      vTrein.setTreinSoort(getTagValue(VertrekkendeTrein.TREINSOORT, eElement));
-			      vTrein.setVertrekSpoor(getTagValue(VertrekkendeTrein.VERTREKSPOOR, eElement));
-			      vTrein.setRouteTekst(getTagValue(VertrekkendeTrein.ROUTETEKST, eElement));
+			      vTrein.setRitNummer(
+			    		  getTagValue(VertrekkendeTrein.RITNUMMER, vertrekkendeTreinElement));
+			      vTrein.setDelay(
+			    		  getTagValue(VertrekkendeTrein.VERTREKVERTRAGINGTEKST, vertrekkendeTreinElement));
+			      vTrein.setVertrekTijd(
+			    		  getTagValue(VertrekkendeTrein.VERTREKTIJD, vertrekkendeTreinElement));
+			      vTrein.setEindBestemming(
+			    		  getTagValue(VertrekkendeTrein.EINDBESTEMMING, vertrekkendeTreinElement));
+			      vTrein.setTreinSoort(
+			    		  getTagValue(VertrekkendeTrein.TREINSOORT, vertrekkendeTreinElement));
+			      vTrein.setVertrekSpoor(
+			    		  getTagValue(VertrekkendeTrein.VERTREKSPOOR, vertrekkendeTreinElement));
+			      vTrein.setRouteTekst(
+			    		  getTagValue(VertrekkendeTrein.ROUTETEKST, vertrekkendeTreinElement));
 			      
-			      //TODO add Opmerkings
+			      NodeList nListOpmerking = doc.getElementsByTagName(VertrekkendeTrein.OPMERKINGEN);
 			      
+			      if (nListOpmerking!=null){
+			    	  if (nListOpmerking.getLength()>=1){
+			    		  Log.d(TAG, "Opmerking being found for trein " + vTrein.getRitNummer());
+			    		  Node n=nListOpmerking.item(0);
+			    		  Element element = (Element) nNode;
+			    		  vTrein.setOpmerking(
+			    				  getTagValue(VertrekkendeTrein.OPMERKING, element).trim());
+			    	  }
+			      }
 			      arrayList.add(vTrein);
-	 
 			   }
 			}
 		  } catch (Exception e) {

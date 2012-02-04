@@ -3,6 +3,8 @@ package com.sandeepthukral.tutorial;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.util.Log;
+
 import com.sandeepthukral.tutorial.util.Utilities;
 
 public class VertrekkendeTrein {
@@ -15,7 +17,10 @@ public class VertrekkendeTrein {
 	private String VertrekSpoor;
 	private boolean wijziging;
 	private String delay ;
+	private String opmerking;
 	
+	
+
 	public static final String RITNUMMER = "RitNummer";
 	public static final String VERTREKTIJD = "VertrekTijd";
 	public static final String EINDBESTEMMING = "EindBestemming";
@@ -27,6 +32,8 @@ public class VertrekkendeTrein {
 	public static final String VERTREKVERTRAGINGTEKST = "VertrekVertragingTekst";
 	public static final String OPMERKINGEN = "Opmerkingen";
 	public static final String OPMERKING = "Opmerking";
+	
+	private final String OPMERKING_RIJDT_VANDAAG_NIET="Rijdt vandaag niet";
 	
 	
 	public VertrekkendeTrein (){	
@@ -117,5 +124,18 @@ public class VertrekkendeTrein {
 	public void setDelay(String delay) {
 		String[] strings=delay.split(" ");
 		this.delay = strings[0];
+	}
+	
+	public String getOpmerking() {
+		return opmerking;
+	}
+
+	public void setOpmerking(String opmerking) {
+		this.opmerking = opmerking;
+		// If a specific Opmerking is set, then the delay is set to XX
+		// XX indicates that the train will not fun today
+		if (opmerking.equalsIgnoreCase(OPMERKING_RIJDT_VANDAAG_NIET)) {
+			this.delay="XX";
+		}
 	}
 }
