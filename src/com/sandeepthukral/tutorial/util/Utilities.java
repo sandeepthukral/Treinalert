@@ -33,7 +33,7 @@ public class Utilities {
 		
 	}
 	
-	private static ArrayList<VertrekkendeTrein> getListOfTrains(String xml, int numberOfItems) {
+	public static ArrayList<VertrekkendeTrein> getListOfTrains(String xml, int numberOfItems) {
 		
 		InputStream is = new ByteArrayInputStream(xml.getBytes());
 		return getListOfTrains(is, numberOfItems);

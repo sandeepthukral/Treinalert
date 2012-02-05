@@ -2,6 +2,7 @@ package com.sandeepthukral.tutorial;
 
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class TreinAlert extends Activity {
 						HttpResponse execute = client.execute(httpGet);
 						Log.d("performance","getting inputstream");
 						InputStream content = execute.getEntity().getContent();
-
+						
 						Log.d("performance","making string out of inputstream");
 						BufferedReader buffer = new BufferedReader(
 							new InputStreamReader(content));
@@ -140,7 +141,7 @@ public class TreinAlert extends Activity {
 							response += s;
 						}
 						Log.d("performance","string created");
-
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -153,7 +154,9 @@ public class TreinAlert extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			Log.d("performance","onPostExecute started");
-			listOfDepartures=Utilities.getDepartureDetails(result,10);
+			
+			InputStream is = new ByteArrayInputStream(result.getBytes());
+			listOfDepartures=Utilities.getListOfTrains(is,10);
 			
 			Log.d("performance","Adapter being cleaned and reloaded");
 			adapter.clear();
