@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory 
+        android:title="Updates"
+        android:key="category_updates">
+        
+        <CheckBoxPreference 
+            android:key="perform_updates"
+            android:summary="Enable or disable data updates"
+            android:title="Enable updates" 
+            android:defaultValue="true"
+        />
+                
+        <ListPreference 
+            android:key="updates_interval"
+            android:title="Updates interval"
+            android:summary="Define how often updates will be performed"
+            android:defaultValue="1000" 
+            android:entries="@array/updateInterval"
+            android:entryValues="@array/updateIntervalValues"
+            android:dependency="perform_updates"
+        /> 
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="Notification Settings"
+        android_key="category_notifications">
+        
+        <CheckBoxPreference 
+            android:key="flash_lights"
+            android:summary="Flash lights on notifications"
+            android:title="Flash Lights" 
+            android:defaultValue="true"/>
+        
+        <CheckBoxPreference 
+            android:key="sould_alarm"
+            android:summary="Sound Alarm on notifications"
+            android:title="Sound Alarm" 
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+        
+</PreferenceScreen>

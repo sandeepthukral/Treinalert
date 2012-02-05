@@ -20,9 +20,11 @@ import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,9 +54,10 @@ public class TreinAlert extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		textView = (TextView) findViewById(R.id.TextView01);
 		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		textView = (TextView) findViewById(R.id.TextView01);
 		ListView list = (ListView) findViewById(R.id.trains);
 		
 		adapter=new TrainAdapter();
@@ -282,7 +285,9 @@ public class TreinAlert extends Activity {
     		return(true);
     	} else if (item.getItemId()==R.id.settings) {
     		//showDialog(SHOW_SETTINGS_COMING_DIALOG);
-    		Toast.makeText(TreinAlert.this, "The settings dialog will come soon", Toast.LENGTH_SHORT).show();
+    		//Toast.makeText(TreinAlert.this, "The settings dialog will come soon", Toast.LENGTH_SHORT).show();
+    		Intent intent = new Intent(this,SettingsMain.class);
+    		startActivity(intent);
     		return(true);
     	}
     	
