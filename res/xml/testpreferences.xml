@@ -39,6 +39,12 @@
             android:summary="Sound Alarm on notifications"
             android:title="Sound Alarm" 
             android:defaultValue="true"/>
+        
+        <CheckBoxPreference 
+            android:key="vibrate"
+            android:summary="Vibrate device on notification"
+            android:title="Vibrate" 
+            android:defaultValue="true"/>
     </PreferenceCategory>
         
 </PreferenceScreen>
