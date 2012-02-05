@@ -17,6 +17,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -181,7 +183,17 @@ public class TreinAlert extends Activity {
 			notifications.setCancelledTrain(cancelledTrain);
 			notifications.setDelayedTrain(delayedTrain);
 			
-			notifications.showNotification(TreinAlert.this);
+			String ns = Context.NOTIFICATION_SERVICE;
+			NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+			
+			if (cancelledTrain || delayedTrain){
+				notifications.showNotification(TreinAlert.this, 
+						mNotificationManager, HandleNotifications.NOTIFICATION_ID_DELAY_CLNCELLATION);
+		
+			} else {
+				notifications.clearNotification(mNotificationManager, 
+						HandleNotifications.NOTIFICATION_ID_DELAY_CLNCELLATION);
+			}
 		}
 	}
 
