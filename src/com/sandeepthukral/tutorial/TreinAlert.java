@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sandeepthukral.tutorial.util.HandleNotifications;
 import com.sandeepthukral.tutorial.util.Utilities;
 
 public class TreinAlert extends Activity {
@@ -153,6 +154,9 @@ public class TreinAlert extends Activity {
 
 		@Override
 		protected void onPostExecute(String result) {
+			HandleNotifications notifications = new  HandleNotifications();
+			boolean delayedTrain=false;
+			boolean cancelledTrain=false;
 			Log.d("performance","onPostExecute started");
 			
 			InputStream is = new ByteArrayInputStream(result.getBytes());
@@ -162,9 +166,22 @@ public class TreinAlert extends Activity {
 			adapter.clear();
 			for (VertrekkendeTrein vt : listOfDepartures) {
 				Log.d(TAG, "Adding train ID " + vt.getRitNummer());
+				if (vt.isSetDelay()){
+					if (vt.getDelay().equalsIgnoreCase(VertrekkendeTrein.CANCELLED_TRAIN_STRING)){
+						cancelledTrain=true;
+					} else {
+						delayedTrain=true;
+					}
+				}
 				adapter.add(vt);
 			}
 			Log.d("performance","Adapter loaded");
+			
+			//TODO check for events that need Notifications
+			notifications.setCancelledTrain(cancelledTrain);
+			notifications.setDelayedTrain(delayedTrain);
+			
+			notifications.showNotification(TreinAlert.this);
 		}
 	}
 

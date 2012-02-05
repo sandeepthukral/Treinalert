@@ -34,6 +34,7 @@ public class VertrekkendeTrein {
 	public static final String OPMERKING = "Opmerking";
 	
 	private final String OPMERKING_RIJDT_VANDAAG_NIET="Rijdt vandaag niet";
+	public final static String CANCELLED_TRAIN_STRING = "XX";
 	
 	
 	public VertrekkendeTrein (){	
@@ -137,5 +138,12 @@ public class VertrekkendeTrein {
 		if (opmerking.equalsIgnoreCase(OPMERKING_RIJDT_VANDAAG_NIET)) {
 			this.delay="XX";
 		}
+	}
+	
+	public boolean isSetDelay(){
+		if (this.delay.equalsIgnoreCase(""))
+			return false;
+		else 
+			return true;
 	}
 }
