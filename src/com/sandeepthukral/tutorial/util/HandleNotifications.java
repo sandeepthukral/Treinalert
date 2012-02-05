@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 public class HandleNotifications {
@@ -39,14 +41,9 @@ public class HandleNotifications {
 	
 	public void showNotification(TreinAlert reference, 
 			NotificationManager mNotificationManager, int notificationId){
-		/*
-		if (this.cancelledTrain){
-			Toast.makeText(reference, "At least one train has been cancelled", Toast.LENGTH_SHORT).show();
-		}
-		if (this.delayedTrain){
-			Toast.makeText(reference, "At least one train is running late", Toast.LENGTH_SHORT).show();
-		}
-		*/
+		
+		SharedPreferences preferences = 
+				PreferenceManager.getDefaultSharedPreferences(reference);
 		
 		String contentTitle="";
 		String contentText="";
@@ -72,10 +69,17 @@ public class HandleNotifications {
 
 		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
 		
-		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.defaults |= Notification.DEFAULT_VIBRATE;
-		notification.defaults |= Notification.FLAG_SHOW_LIGHTS;
+		if (preferences.getBoolean("flash_lights", true)){
+			notification.defaults |= Notification.FLAG_SHOW_LIGHTS;
+		}
+		if (preferences.getBoolean("sound_alarm", true)){
+			notification.defaults |= Notification.DEFAULT_SOUND;
+		}
+		if (preferences.getBoolean("vibrate", false)){
+			notification.defaults |= Notification.DEFAULT_VIBRATE;
+		}
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		notification.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
 
 		mNotificationManager.notify(notificationId, notification);
 	}
