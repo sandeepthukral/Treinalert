@@ -1,4 +1,4 @@
-package com.sandeepthukral.tutorial;
+package com.sandeepthukral.android.treinalert;
 
 
 import java.io.BufferedReader;
@@ -37,8 +37,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sandeepthukral.tutorial.util.HandleNotifications;
-import com.sandeepthukral.tutorial.util.Utilities;
+import com.sandeepthukral.android.treinalert.util.HandleNotifications;
+import com.sandeepthukral.android.treinalert.util.Utilities;
+import com.sandeepthukral.tutorial.R;
 
 public class TreinAlert extends Activity {
 	private TextView textView;

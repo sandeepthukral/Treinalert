@@ -1,11 +1,11 @@
-package com.sandeepthukral.tutorial;
+package com.sandeepthukral.android.treinalert;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.util.Log;
 
-import com.sandeepthukral.tutorial.util.Utilities;
+import com.sandeepthukral.android.treinalert.util.Utilities;
 
 public class VertrekkendeTrein {
 	

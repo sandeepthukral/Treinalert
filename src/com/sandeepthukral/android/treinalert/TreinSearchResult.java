@@ -1,4 +1,4 @@
-package com.sandeepthukral.tutorial;
+package com.sandeepthukral.android.treinalert;
 
 import java.util.ArrayList;
 

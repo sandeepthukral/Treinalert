@@ -1,6 +1,6 @@
-package com.sandeepthukral.tutorial.util;
+package com.sandeepthukral.android.treinalert.util;
 
-import com.sandeepthukral.tutorial.TreinAlert;
+import com.sandeepthukral.android.treinalert.TreinAlert;
 
 import android.R;
 import android.app.Notification;

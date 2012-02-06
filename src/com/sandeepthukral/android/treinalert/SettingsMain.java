@@ -1,4 +1,6 @@
-package com.sandeepthukral.tutorial;
+package com.sandeepthukral.android.treinalert;
+
+import com.sandeepthukral.tutorial.R;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.sandeepthukral.tutorial.util;
+package com.sandeepthukral.android.treinalert.util;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +20,7 @@ import java.text.ParseException;
 
 import android.util.Log;
 
-import com.sandeepthukral.tutorial.VertrekkendeTrein;
+import com.sandeepthukral.android.treinalert.VertrekkendeTrein;
 
 public class Utilities {
 	
